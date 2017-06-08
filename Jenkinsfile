@@ -1,4 +1,4 @@
-node {
+node ('docker') {
    // Mark the code checkout 'stage'....
    stage 'checkout'
 
