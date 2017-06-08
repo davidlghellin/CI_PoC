@@ -1,11 +1,12 @@
 node('docker') {
    
    stage('pre-reqs'){
+      //prepare our slave container
       sh "apt-get -qq update && apt-get -qq -y install maven"
-      sh "pip3 install requests"
-      // Mark the code checkout 'stage'....
+      sh "pip3 install requests bs4"
+      
    }
-   stage('checkout'){
+   stage('checkout'){      
       // Get some code from a GitHub repository
       git url: 'https://github.com/mpenate/CI_PoC'
       sh 'git clean -fdx; sleep 4;'    
