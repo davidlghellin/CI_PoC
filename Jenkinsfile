@@ -2,6 +2,7 @@ node('docker') {
    
    stage('pre-reqs'){
       sh "apt-get update && apt-get -y install maven"
+      sh "pyp3 install requests"
       // Mark the code checkout 'stage'....
    }
    stage('checkout'){
