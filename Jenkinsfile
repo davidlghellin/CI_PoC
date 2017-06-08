@@ -12,7 +12,7 @@ node('docker') {
    }
    
    stage('package'){
-      sh "mvn clean package"    
+      sh "mvn -q clean package"    
    }
 
    stage('build image'){
