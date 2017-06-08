@@ -10,10 +10,10 @@ node {
    stage 'build image'
    // set the version of the build artifact to the Jenkins BUILD_NUMBER so you can
    // map artifacts to Jenkins builds
-   sh "docker build . -t qa.stratio.com/stratio/ci_poc:test"
+   sh "docker build . -t bootstrap-sec.labs.stratio.com:5000/microservice-ci-poc:v1"
 
    stage 'push image'
 
-   sh "docker push qa.stratio.com/stratio/ci_poc:test"
+   sh "docker push bootstrap-sec.labs.stratio.com:5000/microservice-ci-poc:v1"
 
 }

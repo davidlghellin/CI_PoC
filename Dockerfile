@@ -1,16 +1,13 @@
-FROM qa.stratio.com/alpine:3.5
+FROM bootstrap-sec.labs.stratio.com:5000/java-ms-dockerbase:v1
 
+VOLUME /tmp
 
-RUN apk update && \
-    apk add python3 && \
-    python3 -m ensurepip && \
-    rm -r /usr/lib/python*/ensurepip && \
-    pip3 install --upgrade pip setuptools && \
-    pip3 install xlsxwriter && \
-    rm -r /root/.cache
+ADD *.jar app.jar
 
-COPY helloServer.py /
+RUN touch /data/app.jar && \
+    adduser -D -u 1000 user && \
+    chown -R user /data
+USER user
 
-EXPOSE 8080
-
-CMD python3 /helloServer.py && tail -f /var/log/*
+ENV JAVA_OPTS=""
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /data/app.jar --server.port=$PORT0 " ]
