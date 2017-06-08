@@ -1,8 +1,6 @@
 FROM bootstrap-sec.labs.stratio.com:5000/java-ms-dockerbase:v1
 
-VOLUME /tmp
-
-ADD *.jar app.jar
+ADD target/hello-world-host-2.0-SNAPSHOT.jar app.jar
 
 RUN touch /data/app.jar && \
     adduser -D -u 1000 user && \
