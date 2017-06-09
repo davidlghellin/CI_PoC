@@ -27,11 +27,15 @@ node('docker'){
    }
    
    stage('test'){
-      sh "python3 test.py master-1.node.paas.labs.stratio.com admin 1234"
+      withCredentials([string(credentialsId: 'admin', variable: 'PW1')]) {
+         sh "python3 test.py master-1.node.paas.labs.stratio.com admin '$PW1'"
+      }
    }
    
    stage('deploy'){
-      sh "python3 deploy.py master-1.node.paas.labs.stratio.com admin 1234"
+       withCredentials([string(credentialsId: 'admin', variable: 'PW1')]) {
+         sh "python3 deploy.py master-1.node.paas.labs.stratio.com admin '$PW1'"
+      }
    }
 
 }
