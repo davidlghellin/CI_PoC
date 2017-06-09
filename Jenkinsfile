@@ -54,7 +54,7 @@ node('docker'){
            echo "no input was received before timeout"
       } else if (userInput == true) {
            withCredentials([string(credentialsId: 'admin', variable: 'PW1')]) {
-               sh "python3 test.py master-1.node.paas.labs.stratio.com admin '$PW1'"
+               sh "python3 deploy.py master-1.node.paas.labs.stratio.com admin '$PW1'"
             }           
       } else {
            // stranger things
