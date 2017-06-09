@@ -2,7 +2,7 @@ node('docker'){
    
    stage('pre-reqs'){
       //prepare our slave container
-      sh "apt-get -qq update && apt-get -qq -y install maven python-lxml"
+      sh "apt-get -qq update && apt-get -qq -y install maven python-dev libxml2-dev libxslt1-dev zlib1g-dev"
       sh "pip3 install requests bs4 lxml"
       
    }
