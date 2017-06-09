@@ -1,4 +1,4 @@
-node('docker') {
+node(){
    
    stage('pre-reqs'){
       //prepare our slave container
