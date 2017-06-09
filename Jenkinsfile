@@ -33,7 +33,7 @@ node('docker'){
    }
       
    stage('deploy'){                  
-      def userInput = true
+      def userInput = false
       def didTimeout = false
       try {
           timeout(time: 30, unit: 'SECONDS') { // change to a convenient timeout for you
