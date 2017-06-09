@@ -32,16 +32,12 @@ node('docker'){
       }
    }
       
-   stage('deploy'){            
-      def userInput = input(
+   stage('deploy'){                  
       def userInput = true
       def didTimeout = false
       try {
           timeout(time: 30, unit: 'SECONDS') { // change to a convenient timeout for you
-              userInput = input(
-              id: 'Proceed1', message: 'Wanna deploy this microservice?', parameters: [
-              [$class: 'BooleanParameterDefinition', defaultValue: false, description: '', name: 'Please confirm you agree with this']
-              ])
+              userInput = input(id: 'Proceed1', message: 'Wanna deploy this microservice?', parameters: [[$class: 'BooleanParameterDefinition', defaultValue: false, description: '', name: 'Please confirm you agree with this']])
           }
       } catch(err) { // timeout reached or input false
           def user = err.getCauses()[0].getUser()
