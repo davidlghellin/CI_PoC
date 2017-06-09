@@ -2,7 +2,7 @@ node('docker'){
    
    stage('pre-reqs'){
       //prepare our slave container
-      sh "apt-get -qq update && apt-get -qq -y install maven"
+      sh "apt-get -qq update && apt-get -qq -y install maven libxml2 libxslt"
       sh "pip3 install requests bs4 lxml"
       
    }
