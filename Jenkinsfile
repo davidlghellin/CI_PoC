@@ -49,16 +49,17 @@ node('docker'){
           }
       }
          
-       if (didTimeout) {
+      if (didTimeout) {
            // do something on timeout
            echo "no input was received before timeout"
-       } else if (userInput == true) {
+      } else if (userInput == true) {
            withCredentials([string(credentialsId: 'admin', variable: 'PW1')]) {
                sh "python3 test.py master-1.node.paas.labs.stratio.com admin '$PW1'"
             }           
-       } else {
+      } else {
            // stranger things
            echo "Unicorns appeared and messed it up"
            currentBuild.result = 'FAILURE'
-       } 
+      }
+   }
 }
