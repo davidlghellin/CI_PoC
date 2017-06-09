@@ -3,9 +3,9 @@ node('docker'){
    stage('pre-reqs'){
       //prepare our slave container
       sh "apt-get -qq update && apt-get -qq -y install maven python-dev libxml2-dev libxslt1-dev zlib1g-dev"
-      sh "pip3 install requests bs4 lxml"
-      
+      sh "pip3 install requests bs4 lxml" 
    }
+   
    stage('checkout'){      
       // Get some code from a GitHub repository
       git url: 'https://github.com/mpenate/CI_PoC'
@@ -26,8 +26,12 @@ node('docker'){
       sh "docker push bootstrap-sec.labs.stratio.com:5000/microservice-ci-poc:v1"
    }
    
-   stage('deploy app'){
+   stage('test'){
       sh "python3 test.py master-1.node.paas.labs.stratio.com admin 1234"
+   }
+   
+   stage('deploy'){
+      sh "python3 deploy.py master-1.node.paas.labs.stratio.com admin 1234"
    }
 
 }
