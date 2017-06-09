@@ -31,11 +31,38 @@ node('docker'){
          sh "python3 test.py master-1.node.paas.labs.stratio.com admin '$PW1'"
       }
    }
-   
-   stage('deploy'){
-       withCredentials([string(credentialsId: 'admin', variable: 'PW1')]) {
-         sh "python3 deploy.py master-1.node.paas.labs.stratio.com admin '$PW1'"
+      
+   stage('deploy'){            
+      def userInput = input(
+      def userInput = true
+      def didTimeout = false
+      try {
+          timeout(time: 30, unit: 'SECONDS') { // change to a convenient timeout for you
+              userInput = input(
+              id: 'Proceed1', message: 'Wanna deploy this microservice?', parameters: [
+              [$class: 'BooleanParameterDefinition', defaultValue: false, description: '', name: 'Please confirm you agree with this']
+              ])
+          }
+      } catch(err) { // timeout reached or input false
+          def user = err.getCauses()[0].getUser()
+          if('SYSTEM' == user.toString()) { // SYSTEM means timeout.
+              didTimeout = true
+          } else {
+              userInput = false
+              echo "Aborted by: [${user}]"
+          }
       }
-   }
-
+         
+       if (didTimeout) {
+           // do something on timeout
+           echo "no input was received before timeout"
+       } else if (userInput == true) {
+           withCredentials([string(credentialsId: 'admin', variable: 'PW1')]) {
+               sh "python3 test.py master-1.node.paas.labs.stratio.com admin '$PW1'"
+            }           
+       } else {
+           // stranger things
+           echo "Unicorns appeared and messed it up"
+           currentBuild.result = 'FAILURE'
+       } 
 }
