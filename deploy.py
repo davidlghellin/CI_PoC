@@ -56,7 +56,7 @@ authCookie = login_in_dcos(master, user, pswd)
 json_data=open("marathon.json").read()
 mjson = json.loads(json_data)
 ##Change ID in order to mark app as test
-newId = "/hello-world-host-test"
+newId = "/hello-world-host-v1"
 mjson["id"] = newId
 heads = {'Content-type': 'application/json'}
 
