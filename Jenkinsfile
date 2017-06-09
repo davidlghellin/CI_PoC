@@ -41,7 +41,7 @@ node('docker'){
               userInput = input(id: 'Proceed1', message: 'Wanna deploy this microservice?', parameters: [[$class: 'BooleanParameterDefinition', defaultValue: false, description: '', name: 'Please confirm you agree with this']])
           }
       } catch(err) { // timeout reached or input false          
-          echo "Aborted deployment"          
+          echo "As request has not been accepted this changes won't be deployed"          
       }
          
       if (userInput == true) {
