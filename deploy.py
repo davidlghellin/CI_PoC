@@ -78,5 +78,6 @@ url = "http://"+host+":"+str(port)
 time.sleep(2)
 try:
     response = requests.get(url)
+    print("\nApp is up and runnig at "+url)
 except:
     sys.exit("Cant reach app")
