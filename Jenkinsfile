@@ -3,7 +3,7 @@ node('docker'){
    stage('pre-reqs'){
       //prepare our slave container
       sh "apt-get -qq update && apt-get -qq -y install maven"
-      sh "pip3 install requests bs4"
+      sh "pip3 install requests bs4 lxml"
       
    }
    stage('checkout'){      
