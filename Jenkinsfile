@@ -35,6 +35,7 @@ node('docker'){
    stage('deploy'){                  
       def userInput = false
       def didTimeout = false
+      echo "You are able to deploy this, wanna deploy it?"
       try {
           timeout(time: 30, unit: 'SECONDS') { // change to a convenient timeout for you
               userInput = input(id: 'Proceed1', message: 'Wanna deploy this microservice?', parameters: [[$class: 'BooleanParameterDefinition', defaultValue: false, description: '', name: 'Please confirm you agree with this']])
