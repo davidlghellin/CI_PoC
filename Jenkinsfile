@@ -27,7 +27,7 @@ node(){
    }
    
    stage('deploy app'){
-      sh "python3 test.py master-1.node.paas.labs.stratio.com admin 1234"
+      sh "python3 test.py 10.200.0.241 admin 1234"
    }
 
 }
