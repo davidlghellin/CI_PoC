@@ -4,7 +4,8 @@ ADD target/hello-world-host-2.0-SNAPSHOT.jar app.jar
 
 RUN touch /data/app.jar && \
     adduser -D -u 1000 user && \
-    chown -R user /data
+    chown -R user /data && \
+    echo "hellouda!"
 USER user
 
 ENV JAVA_OPTS=""
